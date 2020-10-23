@@ -5,7 +5,13 @@ const User = require('../models/user');
 
 const CustomError = require('../utils/utils');
 
-const { JWT_SECRET = 'dev-key' } = process.env;
+let JWT_SECRET;
+
+if (process.env.NODE_ENV !== 'production') {
+  JWT_SECRET = process.env.JWT_SECRET ? process.env.JWT_SECRET : 'dev-key';
+} else {
+  JWT_SECRET = process.env.JWT_SECRET;
+}
 
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -14,7 +20,6 @@ module.exports.getUser = (req, res, next) => {
     .catch(next);
 };
 
-
 module.exports.createUser = (req, res, next) => {
   const { password, email, name } = req.body;
   bcrypt.hash(password, 10).then((hashPassword) => {
@@ -22,7 +27,7 @@ module.exports.createUser = (req, res, next) => {
       .then((user) => res.status(200).send({ _id: user._id }))
       .catch((err) => {
         if (err.code === 11000) {
-          next(new CustomError(409, err.message));
+          next(new CustomError(409, 'Пользователь с данным email уже зарегистрирован'));
         } else {
           next(new CustomError(400, err.message));
         }
