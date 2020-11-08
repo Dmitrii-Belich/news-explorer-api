@@ -15,7 +15,7 @@ const CustomError = require('./utils/utils');
 
 const { PORT = 3000 } = process.env;
 const app = express();
-app.use(cors({
+app.options(cors({
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
