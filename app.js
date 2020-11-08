@@ -18,8 +18,6 @@ const app = express();
 app.options(cors({
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
   credentials: true,
 }));
 app.use(limiter);
