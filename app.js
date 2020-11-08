@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const cors = require('cors');
+//const cors = require('cors');
 require('dotenv').config();
 const { errors } = require('celebrate');
 
@@ -15,7 +15,7 @@ const CustomError = require('./utils/utils');
 
 const { PORT = 3000 } = process.env;
 const app = express();
-app.use(cors());
+//app.use(cors());
 app.use(limiter);
 app.use(bodyParser.json());
 
