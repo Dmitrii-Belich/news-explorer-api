@@ -29,23 +29,23 @@ const articleSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
-    validate: {
+    /*     validate: {
       validator(v) {
         return /^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/.test(v);
       },
       message: 'Указана некорректная ссылка',
-    },
+    }, */
   },
 
   image: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
+    /*     validate: {
+         validator(v) {
         return /^(https?:\/\/(www\.)?)[\w-]+\.[\w./():,-]+#?$/.test(v);
       },
       message: 'Указана некорректная ссылка',
-    },
+    }, */
   },
 
   owner: {
